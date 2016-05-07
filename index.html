@@ -23,17 +23,19 @@
 <!-- using Handlebar.js templating engine -->
 <script id="to-do-template" type="text/x-handlebars-template">
   {{#each this}}
-  <li class="list list-{{ itemNum }}" data-complete={{complete}}>
+  <li class="list list-{{ itemNum }}" data-complete={{complete}}  data-index={{ itemNum }}>
     <input type="checkbox" class="checkbox">
-    <span class="list-description" data-index={{ itemNum }}>{{ description }}</span>
+    <span class="list-description">{{ description }}</span>
+    <button class="btn btn-delete">Delete</button>
   </li>
   {{/each}}
 </script>
 
 <script id="additional-list" type="text/x-handlebars-template">
-  <li class="list list-{{ itemNum }}" data-complete={{complete}}>
+  <li class="list list-{{ itemNum }}" data-complete={{complete}}  data-index={{ itemNum }}>
     <input type="checkbox" class="checkbox">
-    <span class="list-description" data-index={{ itemNum }}>{{ description }}</span>
+    <span class="list-description">{{ description }}</span>
+    <button class="btn btn-delete">Delete</button>
   </li>
 </script>
 

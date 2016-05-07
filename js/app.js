@@ -10,6 +10,7 @@ $(document).ready(function() {
     populateList(lists, arr);
     markItemDone(arr, $(".checkbox"));
     checkIfItemsDone($(".list"));
+    deleteList(arr);
   } else {
     arr = [];
   }
@@ -17,15 +18,17 @@ $(document).ready(function() {
   btn.on("click", function() {
 
     var inputVal = $(".to-do-field").val();
-    var listObj = { itemNum: arr.length + 1,
+    var listObj = { itemNum: $(".list").length + 1,
                     description: inputVal,
                     complete: false
                     };
 
     if (inputVal) {
       arr.push(listObj);
+      $(".to-do-field").val("");
       addAdditionalList(lists, listObj);
-      localStorage.setItem("lists", JSON.stringify(arr)); // update localStorage
+      updateLocalStorage(arr).updateList() // update localStorage
+      deleteList(arr);
       emptySpan.removeClass("active");
     } else {
       emptySpan.addClass("active");
@@ -47,28 +50,52 @@ $(document).ready(function() {
     markItemDone(arr, checkbox);
   }
 
-  function updateLocalStorage(index, arr) {
+  function updateLocalStorage(arr) {
     return {
-      updateComplete: function(attr) {
-        arr[index].complete = attr;
+      updateList: function() {
         localStorage.setItem("lists", JSON.stringify(arr));
+      },
+      updateComplete: function(index, attr) {
+        arr[index].complete = attr;
+        this.updateList();
+      },
+      deleteList: function(index) {
+        arr.splice(index, 1);
+        this.updateList();
       }
     }
   }
 
+  function deleteList(arr) {
+    var deleteBtn = $(".btn-delete");
+    var allList = $(".list");
+
+    deleteBtn.on("click", function() {
+      var list = $(this).parent();
+      var listIndex = allList.index(list);
+
+      list.remove();
+      updateLocalStorage(arr)
+        .deleteList()
+        .updateList();
+    })
+  }
+
   function markItemDone(arr, checkbox) {
+    var allList = $(".list");
+
     checkbox.on("click", function() {
       var listDescription = $(this).next(),
-          listDescriptionIndex = listDescription.data("index") - 1,
-          list = $(this).parent();
+          list = $(this).parent(),
+          listIndex = allList.index(list);
 
       if ($(this).is(":checked")) {
         listDescription.addClass("done");
-        updateLocalStorage(listDescriptionIndex, arr).updateComplete(true);
+        updateLocalStorage(arr).updateComplete(listIndex, true);
         list.attr("data-complete", true);
       } else {
         listDescription.removeClass("done");
-        updateLocalStorage(listDescriptionIndex, arr).updateComplete(false);
+        updateLocalStorage(arr).updateComplete(listIndex, false);
         list.attr("data-complete", false);
       }
     })
