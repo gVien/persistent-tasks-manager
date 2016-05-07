@@ -7,15 +7,14 @@ $(document).ready(function() {
 
   if (localStorage.hasOwnProperty("lists")) {
     arr = JSON.parse(localStorage.getItem("lists"));
-    populateList(arr);
+    populateList(lists, arr);
     markItemDone(arr, $(".checkbox"));
     checkIfItemsDone($(".list"));
   } else {
     arr = [];
   }
 
-  btn.on("click", function(event) {
-    event.preventDefault();
+  btn.on("click", function() {
 
     var inputVal = $(".to-do-field").val();
     var listObj = { itemNum: arr.length + 1,
@@ -25,27 +24,27 @@ $(document).ready(function() {
 
     if (inputVal) {
       arr.push(listObj);
-      addAdditionalList(listObj);
+      addAdditionalList(lists, listObj);
       localStorage.setItem("lists", JSON.stringify(arr)); // update localStorage
       emptySpan.removeClass("active");
     } else {
       emptySpan.addClass("active");
     }
-
-    markItemDone(arr, $(".checkbox"));
-    checkIfItemsDone($(".list"));
   });
 
-  function populateList(arr) {
+  function populateList(lists, arr) {
     var template = $("#to-do-template").html();
     var compiledTemplate = Handlebars.compile(template);
     lists.append(compiledTemplate(arr));
   }
 
-  function addAdditionalList(listObj) {
+  function addAdditionalList(lists, listObj) {
     var template = $("#additional-list").html();
     var compiledTemplate = Handlebars.compile(template);
     lists.append(compiledTemplate(listObj));
+
+    var checkbox = lists.find(".checkbox").last();
+    markItemDone(arr, checkbox);
   }
 
   function updateLocalStorage(index, arr) {
