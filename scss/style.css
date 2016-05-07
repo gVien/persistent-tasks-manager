@@ -12,9 +12,9 @@ body {
     list-style-type: none; }
   .items-container .done {
     text-decoration: line-through; }
-  .items-container .empty-list {
+  .items-container .input-cannot-be-empty {
     display: none; }
-    .items-container .empty-list.active {
+    .items-container .input-cannot-be-empty.active {
       display: block;
       margin-top: 10px;
       margin-left: 10px;

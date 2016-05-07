@@ -30,6 +30,13 @@
   {{/each}}
 </script>
 
+<script id="additional-list" type="text/x-handlebars-template">
+  <li class="list list-{{ itemNum }}" data-complete={{complete}}>
+    <input type="checkbox" class="checkbox">
+    <span class="list-description" data-index={{ itemNum }}>{{ description }}</span>
+  </li>
+</script>
+
 <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
