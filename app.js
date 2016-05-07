@@ -1,6 +1,7 @@
 $(document).ready(function() {
-  var lists = $(".lists");
-  var btn = $(".btn");
+  var lists = $(".lists"),
+      btn = $(".btn"),
+      emptySpan = $(".input-cannot-be-empty");
 
   var arr = [{description: "WEREWREr", complete: true},
   {description: "WEREWREr wefwef", complete: false}];
@@ -12,13 +13,19 @@ $(document).ready(function() {
                     description: inputVal,
                     complete: false
                     };
-    arr.push(listObj);
-    $(".lists").html(""); //clear form
+
+    if (inputVal) {
+      arr.push(listObj);
+      emptySpan.removeClass("active");
+      $(".lists").html(""); //clear form
+    } else {
+      emptySpan.addClass("active");
+    }
 
     //
     var template = $("#to-do-template").html();
-    var compliedTemplate = Handlebars.compile(template);
-    lists.append(compliedTemplate(arr));
+    var compiledTemplate = Handlebars.compile(template);
+    lists.append(compiledTemplate(arr));
 
     markItemDone(arr, $(".checkbox"));
     checkIfItemsDone($(".list"));

@@ -19,4 +19,15 @@ body {
   .done {
     text-decoration: line-through;
   }
+
+  .empty-list {
+    display: none;
+
+    &.active {
+      display: block;
+      margin-top: 10px;
+      margin-left: 10px;
+      color: red;
+    }
+  }
 }

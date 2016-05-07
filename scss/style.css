@@ -12,5 +12,12 @@ body {
     list-style-type: none; }
   .items-container .done {
     text-decoration: line-through; }
+  .items-container .empty-list {
+    display: none; }
+    .items-container .empty-list.active {
+      display: block;
+      margin-top: 10px;
+      margin-left: 10px;
+      color: red; }
 
 /*# sourceMappingURL=style.css.map */
