@@ -70,13 +70,13 @@ $(document).ready(function() {
     var deleteBtn = $(".btn-delete");
     var allList = $(".list");
 
-    deleteBtn.on("click", function() {
+    // weird behavior that clicks twice without unbinding it
+    deleteBtn.unbind('click').on("click", function() {
       var list = $(this).parent();
       var listIndex = allList.index(list);
 
       list.remove();
       updateLocalStorage(arr).deleteList(listIndex);
-      updateLocalStorage(arr).updateList();
     })
   }
 
