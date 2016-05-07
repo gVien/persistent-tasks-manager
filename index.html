@@ -19,15 +19,15 @@
   </div>
 </div>
 
-  <!-- using Handlebar.js templating engine -->
-  <script id="to-do-template" type="text/x-handlebars-template">
-    {{#each this}}
-    <li class="list list-{{ @index }}">
-      <input type="checkbox" class="checkbox">
-      <span class="list-description">{{ this }}</span>
-    </li>
-    {{/each}}
-  </script>
+<!-- using Handlebar.js templating engine -->
+<script id="to-do-template" type="text/x-handlebars-template">
+  {{#each this}}
+  <li class="list list-{{ itemNum }}" data-complete={{complete}}>
+    <input type="checkbox" class="checkbox">
+    <span class="list-description" data-index={{ itemNum }}>{{ description }}</span>
+  </li>
+  {{/each}}
+</script>
 
 <script type="text/javascript" src="app.js"></script>
 </body>
