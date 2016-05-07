@@ -1,3 +1,14 @@
 body {
   background-color: #f5f8fa;
 }
+
+#to-do-form {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .to-do-field {
+    width: 350px;
+  }
+}
