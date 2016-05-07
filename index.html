@@ -7,15 +7,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 </head>
 <body>
-<form id="to-do-form">
-  <input class="to-do-field" type="text" placeholder="What would you like to do?">
-  <input type="button" value="Add" class="btn">
-</form>
+<div class="items-container">
+  <form id="to-do-form">
+    <input class="to-do-field" type="text" placeholder="What would you like to do?">
+    <input type="button" value="Add" class="btn">
+  </form>
 
-<div class="list-container">
-  <ul class="lists">
-  </ul>
+  <div class="list-container">
+    <ul class="lists">
+    </ul>
+  </div>
 </div>
+
+  <!-- using Handlebar.js templating engine -->
+  <script id="to-do-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <li class="list list-{{ @index }}">
+      <input type="checkbox" class="checkbox">
+      <span class="list-description">{{ this }}</span>
+    </li>
+    {{/each}}
+  </script>
 
 <script type="text/javascript" src="app.js"></script>
 </body>
