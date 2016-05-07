@@ -75,9 +75,8 @@ $(document).ready(function() {
       var listIndex = allList.index(list);
 
       list.remove();
-      updateLocalStorage(arr)
-        .deleteList()
-        .updateList();
+      updateLocalStorage(arr).deleteList(listIndex);
+      updateLocalStorage(arr).updateList();
     })
   }
 
