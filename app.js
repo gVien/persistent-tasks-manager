@@ -5,8 +5,6 @@ $(document).ready(function() {
   var arr = [];
   // localStorage.setItem("lists", JSON.stringify(arr));
 
-
-
   btn.on("click", function() {
     var inputVal = $(".to-do-field").val();
     arr.push(inputVal);
@@ -15,7 +13,18 @@ $(document).ready(function() {
     var compliedTemplate = Handlebars.compile(template);
     lists.append(compliedTemplate(arr));
 
-    var item = $(".list");
-    console.log(item);
+    markItemDone($(".checkbox"));
   });
+
+  function markItemDone(checkbox) {
+    checkbox.on("click", function() {
+      var listDescription = $(this).next();
+
+      if ($(this).is(":checked")) {
+        listDescription.addClass("done");
+      } else {
+        listDescription.removeClass("done");
+      }
+    })
+  }
 });

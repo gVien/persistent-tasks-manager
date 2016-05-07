@@ -10,5 +10,7 @@ body {
     width: 350px; }
   .items-container .list {
     list-style-type: none; }
+  .items-container .done {
+    text-decoration: line-through; }
 
 /*# sourceMappingURL=style.css.map */
