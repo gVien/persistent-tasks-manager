@@ -39,7 +39,7 @@ $(document).ready(function() {
   function populateList(lists, arr) {
     var template = $("#to-do-template").html();
     var compiledTemplate = Handlebars.compile(template);
-    lists.append(compiledTemplate(arr)).hide().slideDown({duration: 1000});
+    lists.append(compiledTemplate(arr)).hide().fadeIn({duration: 1250});
   }
 
   function addAdditionalList(lists, listObj) {
@@ -77,7 +77,7 @@ $(document).ready(function() {
       var list = $(this).parent();
       var listIndex = allList.index(list);
 
-      list.remove();
+      list.fadeOut("slow");
       updateLocalStorage(arr).deleteList(listIndex);
     })
   }
@@ -117,9 +117,9 @@ $(document).ready(function() {
     })
   }
 
-  $(".to-do-field").keypress(function () {
+  $(".to-do-field").keypress(function (e) {
     if (e.which == 13) {
-      $('input[type=button]').click();
+      $("input[type=button]").click();
       return false;
     }
   });

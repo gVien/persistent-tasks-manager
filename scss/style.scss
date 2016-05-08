@@ -1,33 +1,129 @@
+@import "partials/_fonts.scss";
+@import "partials/_colors.scss";
+
 body {
-  background-color: #f5f8fa;
+  background-color: $background-color-1;
+  -webkit-font-smoothing: antialiased;
+  min-width: 320px;
+  background-image: url("../images/bcg_wall.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Just Another Hand', cursive;
 }
 
-.items-container {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.margin-top {
+  margin-top: $margin-default;
+}
+
+#to-do-form {
+  .heading {
+    font-size: $font-size-larger;
+    font-weight: 700;
+    color: $background-color-2;
+  }
 
   .to-do-field {
-    width: 350px;
+    background-image: url("../images/yellow-notepad-paper.png");
+    background-repeat:  repeat-y;
+    background-position: -80px;
+    background-size: 110%;
+    border-radius: 4px;
+    padding-left: $padding-default;
+    border: 1px solid $border-3;
+    color: $gray-darker;
+    border-radius: 2px;
+    font-size: $font-size-large;
+
+    @media screen and (max-width: 768px) {
+      background-size: 200%;
+    }
   }
+
+  .btn-submit, .to-do-field {
+    height: 50px;
+    width: 100%;
+  }
+}
+
+.lists {
+  padding-left: 0;
 
   .list {
+    position: relative;
     list-style-type: none;
-  }
+    background-image: url("../images/yellow-notepad-paper.png");
+    background-repeat:  repeat-y;
+    background-position: -102px;
+    background-size: 110%;
+    border: 1px solid $gray-darker;
+    background-color: $background-color-1;
+    border-radius: 4px;
+    margin-top: $margin-default;
+    padding: $padding-default $padding-default;
 
-  .done {
-    text-decoration: line-through;
+    @media screen and (max-width: 768px) {
+      background-size: 200%;
+    }
+
+    .list-description {
+      font-size: $font-size-large;
+      padding-left: 10px;
+      width: 80%;
+      padding-right: $padding-large;
+      display: inline-block;
+      vertical-align: top;
+
+      &.done {
+        text-decoration: line-through;
+      }
+
+      @media screen and (max-width: 544px) {
+        font-size: 20px;
+        width: 87%;
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.list-container {
+  .checkbox {
+    display: inline;
+    zoom: 2;
   }
 
   .input-cannot-be-empty {
     display: none;
+    font-size: $font-size-default;
 
     &.active {
       display: block;
       margin-top: 10px;
       margin-left: 10px;
-      color: red;
     }
   }
+
+  .btn-delete {
+    position: absolute;
+    right: 20px;
+    width: 100px;
+    top: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateY(-50%);
+
+    @media screen and (max-width: 544px) {
+      position: static;
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      transform: none;
+    }
+  }
+}
+
+.btn {
+  font-size: $font-size-default;
 }
