@@ -82,9 +82,9 @@ body {
   right: 20px;
   width: 100px;
   top: 50%;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
   transform: translateY(-50%); }
   @media screen and (max-width: 544px) {
     .list-container .btn-delete {
