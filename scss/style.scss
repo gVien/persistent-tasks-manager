@@ -1,5 +1,6 @@
 @import "partials/_fonts.scss";
 @import "partials/_colors.scss";
+@import "partials/_helpers.scss";
 
 body {
   background-color: $background-color-1;
@@ -11,6 +12,10 @@ body {
   background-attachment: fixed;
   height: 100%;
   font-family: 'Just Another Hand', cursive;
+
+  @media screen and (max-width: 768px) {
+    background-position: -550px;
+  }
 }
 
 .margin-top {
@@ -67,6 +72,12 @@ body {
       background-size: 200%;
     }
 
+    &:hover {
+      @include transform(scale(1.005));
+      /* weird pixelated effect */
+      /*@include transition(all .35s ease-in-out);*/
+    }
+
     .list-description {
       font-size: $font-size-large;
       padding-left: 10px;
@@ -109,17 +120,14 @@ body {
     right: 20px;
     width: 100px;
     top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
+    @include transform(translateY(-50%));
 
     @media screen and (max-width: 544px) {
       position: static;
       display: block;
       width: 100%;
       margin-top: 10px;
-      transform: none;
+      @include transform(none);
     }
   }
 }

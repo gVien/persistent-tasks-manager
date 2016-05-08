@@ -10,6 +10,9 @@ body {
   background-attachment: fixed;
   height: 100%;
   font-family: 'Just Another Hand', cursive; }
+  @media screen and (max-width: 768px) {
+    body {
+      background-position: -550px; } }
 
 .margin-top {
   margin-top: 20px; }
@@ -53,6 +56,13 @@ body {
     @media screen and (max-width: 768px) {
       .lists .list {
         background-size: 200%; } }
+    .lists .list:hover {
+      -webkit-transform: scale(1.005);
+      -ms-transform: scale(1.005);
+      -o-transform: scale(1.005);
+      transform: scale(1.005);
+      /* weird pixelated effect */
+      /*@include transition(all .35s ease-in-out);*/ }
     .lists .list .list-description {
       font-size: 30px;
       padding-left: 10px;
@@ -92,6 +102,9 @@ body {
       display: block;
       width: 100%;
       margin-top: 10px;
+      -webkit-transform: none;
+      -ms-transform: none;
+      -o-transform: none;
       transform: none; } }
 
 .btn {
