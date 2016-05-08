@@ -8,13 +8,13 @@ body {
   min-width: 320px;
   background-image: url("../images/bcg_wall.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  /*background-size: cover;*/
   background-attachment: fixed;
   height: 100%;
   font-family: 'Just Another Hand', cursive;
 
   @media screen and (max-width: 768px) {
-    background-position: -550px;
+    background-position: -650px;
   }
 }
 
@@ -67,15 +67,17 @@ body {
     border-radius: 4px;
     margin-top: $margin-default;
     padding: $padding-default $padding-default;
-
+    backface-visibility: hidden;
     @media screen and (max-width: 768px) {
       background-size: 200%;
     }
 
     &:hover {
-      @include transform(scale(1.005));
-      /* weird pixelated effect */
-      /*@include transition(all .35s ease-in-out);*/
+       /*scaling causes weird pixelated/blurry text effect */
+      /*@include transform(perspective(1px) scale(1.005));*/
+      margin-left: -3px;
+      margin-right: -3px;
+      @include transition(margin .35s ease-in-out);
     }
 
     .list-description {

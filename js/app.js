@@ -11,7 +11,7 @@ $(document).ready(function() {
     populateList(lists, arr);
     markItemDone(arr, $(".checkbox"));
     checkIfItemsDone($(".list"));
-    deleteList(arr);
+    enableDeleteList(arr);
   } else {
     arr = [];
   }
@@ -29,7 +29,7 @@ $(document).ready(function() {
       $(".to-do-field").val("");
       addAdditionalList(lists, listObj);
       updateLocalStorage(arr).updateList() // update localStorage
-      deleteList(arr);
+      enableDeleteList(arr);
       emptySpan.removeClass("active");
     } else {
       emptySpan.addClass("active");
@@ -68,16 +68,19 @@ $(document).ready(function() {
     }
   }
 
-  function deleteList(arr) {
-    var deleteBtn = $(".btn-delete");
+  function enableDeleteList(arr) {
     var allList = $(".list");
+    var deleteBtn = allList.find(".btn-delete");
 
     // weird behavior that clicks twice without unbinding it
     deleteBtn.unbind('click').on("click", function() {
-      var list = $(this).parent();
+      var list = $(this).closest(".list");
       var listIndex = allList.index(list);
 
-      list.fadeOut("slow");
+      list.fadeOut("slow", function() {
+        $(this).remove();
+      });
+
       updateLocalStorage(arr).deleteList(listIndex);
     })
   }
@@ -86,8 +89,8 @@ $(document).ready(function() {
     var allList = $(".list");
 
     checkbox.on("click", function() {
-      var listDescription = $(this).next(),
-          list = $(this).parent(),
+      var listDescription = $(this).nextUntil(".list-description"), // in case if we add a parent element inside .list-description
+          list = $(this).closest(".list"),
           listIndex = allList.index(list);
 
       if ($(this).is(":checked")) {

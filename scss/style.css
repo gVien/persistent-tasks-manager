@@ -6,13 +6,13 @@ body {
   min-width: 320px;
   background-image: url("../images/bcg_wall.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  /*background-size: cover;*/
   background-attachment: fixed;
   height: 100%;
   font-family: 'Just Another Hand', cursive; }
   @media screen and (max-width: 768px) {
     body {
-      background-position: -550px; } }
+      background-position: -650px; } }
 
 .margin-top {
   margin-top: 20px; }
@@ -52,17 +52,20 @@ body {
     background-color: #f5f5f5;
     border-radius: 4px;
     margin-top: 20px;
-    padding: 20px 20px; }
+    padding: 20px 20px;
+    backface-visibility: hidden; }
     @media screen and (max-width: 768px) {
       .lists .list {
         background-size: 200%; } }
     .lists .list:hover {
-      -webkit-transform: scale(1.005);
-      -ms-transform: scale(1.005);
-      -o-transform: scale(1.005);
-      transform: scale(1.005);
-      /* weird pixelated effect */
-      /*@include transition(all .35s ease-in-out);*/ }
+      /*scaling causes weird pixelated/blurry text effect */
+      /*@include transform(perspective(1px) scale(1.005));*/
+      margin-left: -3px;
+      margin-right: -3px;
+      -webkit-transition: margin 0.35s ease-in-out;
+      -moz-transition: margin 0.35s ease-in-out;
+      -o-transition: margin 0.35s ease-in-out;
+      transition: margin 0.35s ease-in-out; }
     .lists .list .list-description {
       font-size: 30px;
       padding-left: 10px;
