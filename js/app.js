@@ -1,7 +1,8 @@
 $(document).ready(function() {
   var lists = $(".lists"),
-      btn = $(".btn"),
+      btn = $(".btn-submit"),
       emptySpan = $(".input-cannot-be-empty");
+
 
   var arr;
 
@@ -38,13 +39,14 @@ $(document).ready(function() {
   function populateList(lists, arr) {
     var template = $("#to-do-template").html();
     var compiledTemplate = Handlebars.compile(template);
-    lists.append(compiledTemplate(arr));
+    lists.append(compiledTemplate(arr)).hide().slideDown({duration: 1000});
   }
 
   function addAdditionalList(lists, listObj) {
     var template = $("#additional-list").html();
     var compiledTemplate = Handlebars.compile(template);
     lists.append(compiledTemplate(listObj));
+    lists.find("li").last().slideDown("slow");
 
     var checkbox = lists.find(".checkbox").last();
     markItemDone(arr, checkbox);
@@ -114,4 +116,11 @@ $(document).ready(function() {
       }
     })
   }
+
+  $(".to-do-field").keypress(function () {
+    if (e.which == 13) {
+      $('input[type=button]').click();
+      return false;
+    }
+  });
 });

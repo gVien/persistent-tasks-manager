@@ -2,23 +2,49 @@
 <html>
 <head>
   <title>To Do List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
   <link rel="stylesheet" type="text/css" href="scss/style.css">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="items-container">
-  <form id="to-do-form">
-    <input class="to-do-field" type="text" placeholder="What would you like to do?">
-    <input type="button" value="Add" class="btn">
-  </form>
 
-  <div class="list-container">
-    <span class="input-cannot-be-empty">You cannot create an empty list!</span>
-    <ul class="lists">
-    </ul>
+  <div class="container margin-top">
+    <div class="row">
+      <form id="to-do-form">
+        <div class="col-sm-12">
+          <div class="alert">
+            <strong>The World most persistent To-Do List without a Database!</strong>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-9">
+            <input class="to-do-field" type="text" placeholder="What would you like to do?">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-3">
+            <input type="button" value="Add" name="add" class="btn btn-success btn-submit">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="list-container">
+      <div class="alert alert-danger input-cannot-be-empty">
+        <strong>You cannot create an empty list!</strong>
+      </div>
+      <ul class="lists">
+      </ul>
+    </div>
   </div>
-</div>
 
 <!-- using Handlebar.js templating engine -->
 <script id="to-do-template" type="text/x-handlebars-template">
@@ -26,16 +52,16 @@
   <li class="list list-{{ itemNum }}" data-complete={{complete}}  data-index={{ itemNum }}>
     <input type="checkbox" class="checkbox">
     <span class="list-description">{{ description }}</span>
-    <button class="btn btn-delete">Delete</button>
+    <button class="btn btn-danger btn-delete">Delete</button>
   </li>
   {{/each}}
 </script>
 
 <script id="additional-list" type="text/x-handlebars-template">
-  <li class="list list-{{ itemNum }}" data-complete={{complete}}  data-index={{ itemNum }}>
+  <li class="list list-{{ itemNum }}" data-complete={{complete}}  data-index={{ itemNum }} style="display: none;">
     <input type="checkbox" class="checkbox">
     <span class="list-description">{{ description }}</span>
-    <button class="btn btn-delete">Delete</button>
+    <button class="btn btn-danger btn-delete">Delete</button>
   </li>
 </script>
 
