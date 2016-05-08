@@ -63,7 +63,6 @@ body {
         text-decoration: line-through; }
       @media screen and (max-width: 544px) {
         .lists .list .list-description {
-          font-size: 20px;
           width: 87%;
           padding-right: 0; } }
 
