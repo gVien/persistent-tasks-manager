@@ -78,7 +78,10 @@ $(document).ready(function() {
       var listIndex = allList.index(list);
 
       list.fadeOut("slow", function() {
-        $(this).remove();
+        // $(this).remove();
+        $(this).css({"visibility":"hidden",display:'block'}).slideUp(function() {
+            $(this).remove();
+        });
       });
 
       updateLocalStorage(arr).deleteList(listIndex);
@@ -86,10 +89,10 @@ $(document).ready(function() {
   }
 
   function markItemDone(arr, checkbox) {
-    var allList = $(".list");
 
     checkbox.on("click", function() {
-      var listDescription = $(this).nextUntil(".list-description"), // in case if we add a parent element inside .list-description
+      var allList = $(".list"),
+          listDescription = $(this).next(),
           list = $(this).closest(".list"),
           listIndex = allList.index(list);
 
