@@ -16,6 +16,7 @@ $(document).ready(function() {
   }
 
   deleteAllItems(arr);
+  toggleTimeStamp();
 
   btn.on("click", function() {
 
@@ -24,6 +25,7 @@ $(document).ready(function() {
 
     var listObj = { itemNum: indexOfLastItem + 1,
                     description: inputVal,
+                    time: moment().format('llll'),
                     complete: false
                     };
 
@@ -54,6 +56,7 @@ $(document).ready(function() {
 
     var checkbox = lists.find(".checkbox").last();
     markItemDone(arr, checkbox);
+    toggleLastItemTimeStamp();
   }
 
   function updateLocalStorage(arr) {
@@ -132,18 +135,19 @@ $(document).ready(function() {
   }
 
   function deleteAllItems(arr) {
-    var deleteWrapper = $(".delete-all-wrapper"),
+    var deleteWrapper = $(".options-wrapper"),
         deleteAllBtn = deleteWrapper.find(".btn-delete-all"),
-        deleteConfirmationBox = deleteWrapper.find("#delete-all-confirmation"),
-        yesBtn = deleteWrapper.find(".btn-yes"),
-        noBtn = deleteWrapper.find(".btn-no");
+        messages = $(".messages"),
+        deleteConfirmationBox = messages.find("#delete-all-confirmation"),
+        yesBtn = messages.find(".btn-yes"),
+        noBtn = messages.find(".btn-no");
 
-    deleteWrapper.on("click", deleteAllBtn, function() {
+    deleteAllBtn.on("click", function() {
       var lists = $(".list");
 
       if (lists.length) {
         emptyList.removeClass("active");
-        deleteConfirmationBox.collapse("show");
+        deleteConfirmationBox.collapse("toggle");
 
         yesBtn.unbind("click").on("click", function() {
           deleteConfirmationBox.collapse("hide");
@@ -166,6 +170,35 @@ $(document).ready(function() {
 
     });
 
+  }
+
+  function toggleTimeStamp() {
+    var toggleTimeStampBtn = $("#toggle-time-stamp button");
+    var btn1 = toggleTimeStampBtn.eq(0);
+    var btn2 = toggleTimeStampBtn.eq(1);
+
+    toggleTimeStampBtn.click(function(){
+      var timeStamp = $(".time-stamp");
+
+      if (btn1.hasClass("btn-time-hide") && btn2.hasClass("btn-time-show")) {
+        timeStamp.removeClass("active");
+      } else {
+        timeStamp.addClass("active");
+      }
+
+      btn1.toggleClass('btn-time-hide btn-time-show btn-default btn-success');
+      btn2.toggleClass('btn-time-hide btn-time-show btn-success btn-default');
+    });
+  }
+
+  function toggleLastItemTimeStamp() {
+      var timeStamp = $(".time-stamp");
+
+      if (!timeStamp.hasClass("active")) {
+        timeStamp.last().removeClass("active");
+      } else {
+        timeStamp.last().addClass("active");
+      }
   }
 
   $(".to-do-field").keypress(function (e) {

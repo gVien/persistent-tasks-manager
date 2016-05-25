@@ -75,6 +75,12 @@ body {
       vertical-align: top; }
       .lists .list .list-description.done {
         text-decoration: line-through; }
+      .lists .list .list-description .time-stamp {
+        color: #797979;
+        font-size: 20px;
+        display: none; }
+        .lists .list .list-description .time-stamp.active {
+          display: inline; }
       @media screen and (max-width: 544px) {
         .lists .list .list-description {
           width: 87%;
@@ -90,18 +96,30 @@ body {
     display: block;
     margin-top: 10px;
     margin-left: 10px; }
-.list-container .delete-all-wrapper {
+.list-container .options-wrapper {
   margin-top: 10px; }
-  .list-container .delete-all-wrapper .confirmation-text {
-    font-size: 30px; }
-    .list-container .delete-all-wrapper .confirmation-text .red {
-      color: red; }
-  .list-container .delete-all-wrapper .btn-delete-all, .list-container .delete-all-wrapper .btn-no, .list-container .delete-all-wrapper .btn-yes {
-    width: 100px; }
-  .list-container .delete-all-wrapper #delete-all-confirmation {
-    margin-top: 10px; }
-  .list-container .delete-all-wrapper .btn-no, .list-container .delete-all-wrapper .btn-yes {
-    margin-right: 15px; }
+  .list-container .options-wrapper .toggle-time-btn {
+    display: inline-block;
+    margin-left: 15px;
+    color: white;
+    vertical-align: top; }
+    .list-container .options-wrapper .toggle-time-btn .time-desc {
+      font-size: 20px;
+      margin-top: -5px;
+      margin-bottom: -5px; }
+    .list-container .options-wrapper .toggle-time-btn #toggle-time-stamp .btn-time-hide, .list-container .options-wrapper .toggle-time-btn #toggle-time-stamp .btn-time-show {
+      font-size: 15px;
+      padding-bottom: 0; }
+.list-container .btn-delete-all, .list-container .btn-no, .list-container .btn-yes {
+  width: 100px; }
+.list-container .messages .confirmation-text {
+  font-size: 30px; }
+  .list-container .messages .confirmation-text .red {
+    color: red; }
+.list-container .messages #delete-all-confirmation {
+  margin-top: 10px; }
+.list-container .messages .btn-no, .list-container .messages .btn-yes {
+  margin-right: 15px; }
 .list-container .btn-delete {
   position: absolute;
   right: 20px;

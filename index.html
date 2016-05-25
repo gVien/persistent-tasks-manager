@@ -18,6 +18,9 @@
 
   <!-- jStorage better solution than HTML5 localstorage due to cross browsers support -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jStorage/0.4.12/jstorage.min.js"></script>
+
+  <!-- for time -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
 </head>
 <body>
 
@@ -46,8 +49,18 @@
       <div class="alert alert-danger input-cannot-be-empty">
         <strong>You cannot create an empty list!</strong>
       </div>
-      <div class="delete-all-wrapper">
+      <div class="options-wrapper">
         <button class="btn btn-danger btn-delete-all" type="button" data-toggle="collapse" aria-expanded="false" aria-controls="delete-all-confirmation">Delete All</button>
+        <span class="toggle-time-btn">
+          <div class="time-desc">Show Time-Stamp?</div>
+          <div class="btn-group" id="toggle-time-stamp">
+            <button type="button" class="btn btn-default btn-time-hide">HIDE</button>
+            <button type="button" class="btn btn-success btn-time-show">SHOW</button>
+          </div>
+        </span>
+      </div>
+
+      <div class="messages">
         <div class="collapse" id="delete-all-confirmation">
           <div class="alert alert-info">
             <p class="confirmation-text">This will <span class="red">delete all</span> to-do lists stored in your browser. Continue?</p>
@@ -71,7 +84,7 @@
   {{#each this}}
   <li class="list list-{{ itemNum }}" data-complete={{complete}}  data-index={{ itemNum }}>
     <input type="checkbox" class="checkbox">
-    <span class="list-description">{{ description }}</span>
+    <span class="list-description">{{ description }} <span class="time-stamp active">[Created At: {{ time }}]</span></span>
     <button class="btn btn-danger btn-delete">Delete</button>
   </li>
   {{/each}}
@@ -80,7 +93,7 @@
 <script id="additional-list" type="text/x-handlebars-template">
   <li class="list list-{{ itemNum }}" data-complete={{complete}}  data-index={{ itemNum }} style="display: none;">
     <input type="checkbox" class="checkbox">
-    <span class="list-description">{{ description }}</span>
+    <span class="list-description">{{ description }} <span class="time-stamp">[Created At: {{ time }}]</span></span>
     <button class="btn btn-danger btn-delete">Delete</button>
   </li>
 </script>

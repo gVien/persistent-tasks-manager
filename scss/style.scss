@@ -92,6 +92,15 @@ body {
         text-decoration: line-through;
       }
 
+      .time-stamp {
+        color: $gray-light;
+        font-size: $font-size-small;
+        display: none;
+
+        &.active {
+          display: inline;
+        }
+      }
       @media screen and (max-width: 544px) {
         width: 87%;
         padding-right: 0;
@@ -117,19 +126,41 @@ body {
     }
   }
 
-  .delete-all-wrapper {
+  .options-wrapper {
     margin-top: 10px;
 
+    .toggle-time-btn {
+      display: inline-block;
+      margin-left: 15px;
+      color: white;
+      vertical-align: top;
+
+      .time-desc {
+        font-size: 20px;
+        margin-top: -5px;
+        margin-bottom: -5px;
+      }
+
+      #toggle-time-stamp {
+        .btn-time-hide, .btn-time-show {
+          font-size: 15px;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .btn-delete-all, .btn-no, .btn-yes {
+    width: 100px;
+  }
+
+  .messages {
     .confirmation-text {
       font-size: $font-size-large;
 
       .red {
         color: red;
       }
-    }
-
-    .btn-delete-all, .btn-no, .btn-yes {
-      width: 100px;
     }
 
     #delete-all-confirmation {
