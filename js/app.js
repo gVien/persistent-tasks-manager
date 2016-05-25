@@ -1,8 +1,8 @@
 $(document).ready(function() {
   var lists = $(".lists"),
       btn = $(".btn-submit"),
-      emptySpan = $(".input-cannot-be-empty");
-
+      emptySpan = $(".input-cannot-be-empty"),
+      emptyList = $(".no-list-to-delete");
 
   var arr = [];
   var storedList = $.jStorage.get("lists");
@@ -15,10 +15,14 @@ $(document).ready(function() {
     enableDeleteList(arr);
   }
 
+  deleteAllItems(arr);
+
   btn.on("click", function() {
 
     var inputVal = $(".to-do-field").val();
-    var listObj = { itemNum: $(".list").length + 1,
+    var indexOfLastItem = $(".list").last().data("index") || 0
+
+    var listObj = { itemNum: indexOfLastItem + 1,
                     description: inputVal,
                     complete: false
                     };
@@ -30,6 +34,7 @@ $(document).ready(function() {
       updateLocalStorage(arr).updateList() // update localStorage
       enableDeleteList(arr);
       emptySpan.removeClass("active");
+      emptyList.removeClass("active");
     } else {
       emptySpan.addClass("active");
     }
@@ -63,6 +68,10 @@ $(document).ready(function() {
       deleteList: function(index) {
         arr.splice(index, 1);
         this.updateList();
+      },
+      deleteAllList: function() {
+        arr.splice(0);
+        $.jStorage.flush();
       }
     }
   }
@@ -120,6 +129,43 @@ $(document).ready(function() {
         itemDescription.addClass("done");
       }
     })
+  }
+
+  function deleteAllItems(arr) {
+    var deleteWrapper = $(".delete-all-wrapper"),
+        deleteAllBtn = deleteWrapper.find(".btn-delete-all"),
+        deleteConfirmationBox = deleteWrapper.find("#delete-all-confirmation"),
+        yesBtn = deleteWrapper.find(".btn-yes"),
+        noBtn = deleteWrapper.find(".btn-no");
+
+    deleteWrapper.on("click", deleteAllBtn, function() {
+      var lists = $(".list");
+
+      if (lists.length) {
+        emptyList.removeClass("active");
+        deleteConfirmationBox.collapse("show");
+
+        yesBtn.unbind("click").on("click", function() {
+          deleteConfirmationBox.collapse("hide");
+          updateLocalStorage(arr).deleteAllList();
+
+          $.each(lists, function(index, list) {
+            $(this).fadeOut("slow", function() {
+              $(this).remove();
+            });
+          });
+        });
+
+        noBtn.unbind("click").on("click", function() {
+          deleteConfirmationBox.collapse("hide");
+        });
+      } else {
+        emptyList.addClass("active");
+      }
+
+
+    });
+
   }
 
   $(".to-do-field").keypress(function (e) {

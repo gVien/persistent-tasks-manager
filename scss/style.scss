@@ -106,7 +106,7 @@ body {
     zoom: 2;
   }
 
-  .input-cannot-be-empty {
+  .input-cannot-be-empty, .no-list-to-delete {
     display: none;
     font-size: $font-size-default;
 
@@ -114,6 +114,30 @@ body {
       display: block;
       margin-top: 10px;
       margin-left: 10px;
+    }
+  }
+
+  .delete-all-wrapper {
+    margin-top: 10px;
+
+    .confirmation-text {
+      font-size: $font-size-large;
+
+      .red {
+        color: red;
+      }
+    }
+
+    .btn-delete-all, .btn-no, .btn-yes {
+      width: 100px;
+    }
+
+    #delete-all-confirmation {
+      margin-top: 10px;
+    }
+
+    .btn-no, .btn-yes {
+      margin-right: 15px;
     }
   }
 

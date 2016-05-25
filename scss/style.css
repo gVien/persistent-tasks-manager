@@ -83,13 +83,25 @@ body {
 .list-container .checkbox {
   display: inline;
   zoom: 2; }
-.list-container .input-cannot-be-empty {
+.list-container .input-cannot-be-empty, .list-container .no-list-to-delete {
   display: none;
   font-size: 25px; }
-  .list-container .input-cannot-be-empty.active {
+  .list-container .input-cannot-be-empty.active, .list-container .no-list-to-delete.active {
     display: block;
     margin-top: 10px;
     margin-left: 10px; }
+.list-container .delete-all-wrapper {
+  margin-top: 10px; }
+  .list-container .delete-all-wrapper .confirmation-text {
+    font-size: 30px; }
+    .list-container .delete-all-wrapper .confirmation-text .red {
+      color: red; }
+  .list-container .delete-all-wrapper .btn-delete-all, .list-container .delete-all-wrapper .btn-no, .list-container .delete-all-wrapper .btn-yes {
+    width: 100px; }
+  .list-container .delete-all-wrapper #delete-all-confirmation {
+    margin-top: 10px; }
+  .list-container .delete-all-wrapper .btn-no, .list-container .delete-all-wrapper .btn-yes {
+    margin-right: 15px; }
 .list-container .btn-delete {
   position: absolute;
   right: 20px;

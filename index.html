@@ -46,6 +46,21 @@
       <div class="alert alert-danger input-cannot-be-empty">
         <strong>You cannot create an empty list!</strong>
       </div>
+      <div class="delete-all-wrapper">
+        <button class="btn btn-danger btn-delete-all" type="button" data-toggle="collapse" aria-expanded="false" aria-controls="delete-all-confirmation">Delete All</button>
+        <div class="collapse" id="delete-all-confirmation">
+          <div class="alert alert-info">
+            <p class="confirmation-text">This will <span class="red">delete all</span> to-do lists stored in your browser. Continue?</p>
+            <div class="confirmation-btn">
+              <button class="btn btn-info btn-no">No</button>
+              <button class="btn btn-info btn-yes">Yes</button>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-info no-list-to-delete">
+          <strong>There is nothing to delete!</strong>
+        </div>
+      </div>
       <ul class="lists">
       </ul>
     </div>
