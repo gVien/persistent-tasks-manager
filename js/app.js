@@ -4,16 +4,15 @@ $(document).ready(function() {
       emptySpan = $(".input-cannot-be-empty");
 
 
-  var arr;
+  var arr = [];
+  var storedList = $.jStorage.get("lists");
 
-  if ($.jStorage.get("lists")) {
-    arr = $.jStorage.get("lists");
+  if (storedList) {
+    arr = storedList;
     populateList(lists, arr);
     markItemDone(arr, $(".checkbox"));
     checkIfItemsDone($(".list"));
     enableDeleteList(arr);
-  } else {
-    arr = [];
   }
 
   btn.on("click", function() {
