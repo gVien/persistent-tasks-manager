@@ -6,8 +6,8 @@ $(document).ready(function() {
 
   var arr;
 
-  if (localStorage.hasOwnProperty("lists")) {
-    arr = JSON.parse(localStorage.getItem("lists"));
+  if ($.jStorage.get("lists")) {
+    arr = $.jStorage.get("lists");
     populateList(lists, arr);
     markItemDone(arr, $(".checkbox"));
     checkIfItemsDone($(".list"));
@@ -55,7 +55,7 @@ $(document).ready(function() {
   function updateLocalStorage(arr) {
     return {
       updateList: function() {
-        localStorage.setItem("lists", JSON.stringify(arr));
+        $.jStorage.set("lists", arr);
       },
       updateComplete: function(index, attr) {
         arr[index].complete = attr;
