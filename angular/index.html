@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Persistent Tasks Manager</title>
+  <title>To Do List - Angular</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href='https://fonts.googleapis.com/css?family=Just+Another+Hand' rel='stylesheet' type='text/css'>
@@ -9,9 +9,8 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-  <link rel="stylesheet" type="text/css" href="scss/style.css">
+  <link rel="stylesheet" type="text/css" href="../scss/style.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -21,25 +20,30 @@
 
   <!-- for time -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-</head>
-<body>
 
-  <div class="container margin-top">
+  <!-- for angular portion of app only -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.min.js"></script>
+  <!-- using ng ui router -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.min.js"></script>
+</head>
+<body ng-app="persistentToDoApp">
+
+  <div class="container margin-top" ng-controller="PersistentToDoListCtrl as toDoList">
     <div class="row">
-      <form id="to-do-form">
+      <form id="to-do-form" ng-submit="toDoList.addList()">
         <div class="col-sm-12">
           <div class="alert">
-            <h1 class="heading">The World Most Persistent Tasks Manager without a Database!</h1>
+            <h1 class="heading">The World Most Persistent To-Do List without a Database!</h1>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-9">
-            <input class="to-do-field" type="text" placeholder="What would you like to do?">
+            <input class="to-do-field" type="text" placeholder="What would you like to do?" ng-model="toDoList.addText">
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-3">
-            <input type="button" value="Add" name="add" class="btn btn-success btn-submit">
+            <input type="submit" value="Add" name="add" class="btn btn-success btn-submit">
           </div>
         </div>
       </form>
@@ -47,7 +51,7 @@
 
     <div class="list-container">
       <div class="alert alert-danger input-cannot-be-empty">
-        <strong>You cannot create an empty task!</strong>
+        <strong>You cannot create an empty list!</strong>
       </div>
       <div class="options-wrapper">
         <button class="btn btn-danger btn-delete-all" type="button" data-toggle="collapse" aria-expanded="false" aria-controls="delete-all-confirmation">Delete All</button>
@@ -63,7 +67,7 @@
       <div class="messages">
         <div class="collapse" id="delete-all-confirmation">
           <div class="alert alert-info">
-            <p class="confirmation-text">This will <span class="red">delete all</span> tasks stored in your browser. Continue?</p>
+            <p class="confirmation-text">This will <span class="red">delete all</span> to-do lists stored in your browser. Continue?</p>
             <div class="confirmation-btn">
               <button class="btn btn-info btn-no">No</button>
               <button class="btn btn-info btn-yes">Yes</button>
@@ -75,29 +79,16 @@
         </div>
       </div>
       <ul class="lists">
+        <li class="list list--" data-complete="{{complete}}"  data-index="{{  }}" ng-repeat="list in toDoList.lists">
+          <input type="checkbox" class="checkbox" ng-model="toDoList.complete">
+          <span class="list-description {{list.complete}}">{{ list.description }} <span class="time-stamp active {{list.complete}}">[Created At: {{ list.time }}]</span></span>
+          <button class="btn btn-danger btn-delete">Delete</button>
+        </li>
       </ul>
     </div>
   </div>
 
-<!-- using Handlebar.js templating engine -->
-<script id="to-do-template" type="text/x-handlebars-template">
-  {{#each this}}
-  <li class="list list-{{ itemNum }}" data-complete={{complete}}  data-index={{ itemNum }}>
-    <input type="checkbox" class="checkbox">
-    <span class="list-description">{{ description }} <span class="time-stamp active">[Created At: {{ time }}]</span></span>
-    <button class="btn btn-danger btn-delete">Delete</button>
-  </li>
-  {{/each}}
-</script>
-
-<script id="additional-list" type="text/x-handlebars-template">
-  <li class="list list-{{ itemNum }}" data-complete={{complete}}  data-index={{ itemNum }} style="display: none;">
-    <input type="checkbox" class="checkbox">
-    <span class="list-description">{{ description }} <span class="time-stamp">[Created At: {{ time }}]</span></span>
-    <button class="btn btn-danger btn-delete">Delete</button>
-  </li>
-</script>
-
-<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="persistentList.js"></script>
 </body>
 </html>
